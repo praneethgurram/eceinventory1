@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/search_layout">
+
+
+
+        <TabHost
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <TabWidget
+                    android:id="@android:id/tabs"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+
+                <FrameLayout
+                    android:id="@android:id/tabcontent"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <LinearLayout
+                        android:id="@+id/Owned_Items"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical"
+                        android:text="Scan/Search">
+                        <ListView
+                            android:id="@+id/Owned"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent">
+
+                        </ListView>
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/Transfer_hide">
+
+                            <Button
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:id="@+id/Transfer1"
+                                android:text="Transfer" />
+                        </LinearLayout>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/Inventory_Search"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical">
+
+                        <Button
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/Barcode_button"
+                            android:text="Scan the barcode"
+                            android:background="#5a1818"
+                            />
+
+
+                        <EditText
+                            android:id="@+id/search_bar"
+                            android:hint="insert barcode value for search"
+                            android:textSize="22sp"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            tools:ignore="HardcodedText"
+                            android:inputType="textPersonName"
+                            android:layout_marginTop="150dp"
+                            />
+                        <Button
+                            android:text="Enter Barcode Text"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/search_button"
+                            android:layout_marginTop="1dp"
+
+                            android:background="#5a1818"/>
+
+                    </LinearLayout>
+
+
+                </FrameLayout>
+            </LinearLayout>
+        </TabHost>
+
+
+    </LinearLayout>
+

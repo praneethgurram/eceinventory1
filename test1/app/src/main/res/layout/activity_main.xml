@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="16dp"
+    android:paddingLeft="16dp"
+    android:paddingRight="16dp"
+    android:paddingTop="16dp"
+    tools:context="com.praneethgurramgmail.test1.MainActivity"
+    android:weightSum="1"
+    android:baselineAligned="false"
+    android:orientation="vertical">
+
+    <EditText
+        android:id="@+id/search_bar"
+        android:hint="insert barcode value for search"
+        android:textSize="22sp"
+        android:layout_width="match_parent"
+        android:layout_height="59dp" />
+
+    <Button
+        android:layout_width="354dp"
+        android:layout_height="36dp"
+
+        android:verticalScrollbarPosition="right"
+        android:id="@+id/Searchbutton"
+        android:text="Search" />
+
+    <ScrollViewView
+        android:layout_width="match_parent"
+        android:layout_height="123dp">
+        <TextView
+            android:id="@+id/inventory_results"
+            android:text="Inventory results"
+            android:textSize="18sp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </ScrollViewView>
+
+
+</LinearLayout>
+
