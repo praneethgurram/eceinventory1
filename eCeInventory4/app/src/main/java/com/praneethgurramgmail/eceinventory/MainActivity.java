@@ -7,8 +7,10 @@ import android.os.AsyncTask;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
+import android.webkit.CookieManager;
 import android.webkit.WebChromeClient;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
@@ -131,30 +133,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        setContentView(R.layout.activity_main);
-        searchboxEtext = (EditText) findViewById(R.id.search_bar);
-        lv = (ListView) findViewById(R.id.list_view);
+        setContentView(R.layout.webview);
 
-        linearLayout = (LinearLayout) findViewById(R.id.search_layout);
-        button = (Button) findViewById(R.id.search_button);
-        button.setOnClickListener(this);
-        email = (TextView) findViewById(R.id.emailaddress);
-        transfer = (Button) findViewById(R.id.Transfer);
-        transfer.setOnClickListener(this);
-
-        transferlayout = (LinearLayout) findViewById(R.id.Transferlayout);
-        transferlayout.setVisibility(View.GONE);
-        Emailaddress = (EditText) findViewById(R.id.emailaddress);
-        login = (LinearLayout)findViewById(R.id.login_layout);
-        scan = (Button) findViewById(R.id.Barcode_button);
-        scan.setOnClickListener(this);
         webView = (WebView) findViewById(R.id.Cas_server);
         WebSettings webSettings = webView.getSettings();
         webSettings.setJavaScriptEnabled(true);
         webView.setWebViewClient(new WebViewClient());
 
-        webView.loadUrl("http://vteceinventory.azurewebsites.net/authentication/LogOn");
-        String url = ("http://vteceinventory.azurewebsites.net/authentication/LogOn");
+        webView.loadUrl("https://vteceinventory.azurewebsites.net/authentication/LogOn");
+        String url = ("https://vteceinventory.azurewebsites.net/authentication/LogOn");
         // ATTENTION: This was auto-generated to implement the App Indexing API.
         // See https://g.co/AppIndexing/AndroidStudio for more information.
         client = new GoogleApiClient.Builder(this).addApi(AppIndex.API).build();
@@ -165,7 +152,41 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         public void onPageFinished(WebView view, String url) {
             // TODO Auto-generated method stub
             super.onPageFinished(view, url);
-            login.setVisibility(View.GONE);
+            //login.setVisibility(View.GONE);
+            CookieManager cookieManager = CookieManager.getInstance();
+            cookieManager.setAcceptCookie(true);
+            Log.d("tt",url.substring(0,11));
+            String value = null;
+            if(url.substring(0,12).equals("https://ecei")) {
+                value = cookieManager.getCookie("https://vteceinventory.azurewebsites.net/authentication/ProduceCookie");
+            }
+
+
+            if(value != null && value.contains("pep3=pep3=pep3")) {
+                setContentView(R.layout.activity_main);
+                searchboxEtext = (EditText) findViewById(R.id.search_bar);
+                lv = (ListView) findViewById(R.id.list_view);
+
+                linearLayout = (LinearLayout) findViewById(R.id.search_layout);
+                button = (Button) findViewById(R.id.search_button);
+                button.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+
+                    }
+                });
+                email = (TextView) findViewById(R.id.emailaddress);
+                transfer = (Button) findViewById(R.id.Transfer);
+                transfer.setOnClickListener(this);
+
+                transferlayout = (LinearLayout) findViewById(R.id.Transferlayout);
+                transferlayout.setVisibility(View.GONE);
+                Emailaddress = (EditText) findViewById(R.id.emailaddress);
+
+                scan = (Button) findViewById(R.id.Barcode_button);
+                scan.setOnClickListener(this);
+            }
+
         }
         }
     /*

@@ -10,7 +10,7 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.Scanner;
 public class Internetconnect {
-    private final static String InUrl = "http://http://eceinventory.ece.vt.edu/api/items/";
+    private final static String InUrl = "http://http://eceinventory.ece.vt.edu/api/UsersByPID/";
 
     static URL bUrl(String InQuery) {
         try {

@@ -1,0 +1,46 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    tools:context="com.praneethgurramgmail.eceinventory.MainActivity"
+    android:id="@+id/pid_layout">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+                <EditText
+                    android:id="@+id/enter_pid"
+                    android:hint="Enter PID"
+                    android:textSize="22sp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    tools:ignore="HardcodedText"
+                    android:inputType="textPersonName"
+                    android:layout_gravity="center"
+                    />
+                <Button
+                    android:text="Enter"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/enter"
+                    android:layout_marginTop="300dp"
+                    android:layout_gravity="center"
+
+
+                    android:background="#FF592B27"/>
+        </LinearLayout>
+
+
+        <android.support.design.widget.BottomNavigationView
+            android:id="@+id/navigation"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:background="?android:attr/windowBackground"
+            app:menu="@menu/navigation"
+            android:layout_marginTop="60dp"/>
+
+
+</LinearLayout>

@@ -1,0 +1,67 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+
+    tools:context="com.praneethgurramgmail.eceinventory.MainActivity">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/tab2_layout"
+            android:orientation="vertical">
+                <EditText
+                    android:id="@+id/search"
+                    android:hint="search using Ptag"
+                    android:textSize="22sp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    tools:ignore="HardcodedText"
+                    android:inputType="textPersonName"
+                    android:layout_gravity="center"
+                    />
+                <Button
+                    android:text="Search"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/search_button"
+                    android:layout_marginTop="1dp"
+                    android:layout_gravity="center"
+                    android:background="#FF592B27"/>
+                <TextView
+                    android:id="@+id/button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="OR"
+                    android:layout_marginTop="125dp"
+                    android:layout_gravity="center"
+                    android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"/>
+
+                <Button
+                    android:id="@+id/scan_button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Scan"
+                    android:background="#FF592B27"
+                    android:layout_marginTop="150dp"
+                    android:layout_gravity="center"/>
+        </LinearLayout>
+
+
+        <android.support.design.widget.BottomNavigationView
+            android:id="@+id/navigation"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:background="?android:attr/windowBackground"
+            app:menu="@menu/navigation"
+            android:layout_marginTop="9dp"/>
+
+
+
+
+
+
+
+</LinearLayout>

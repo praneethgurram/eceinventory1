@@ -6,6 +6,7 @@ import android.os.AsyncTask;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.test.suitebuilder.TestMethod;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
@@ -25,7 +26,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     Button scan, search;
     LinearLayout list,linearLayout;
     ArrayAdapter<String> adapter;
-
+    TextView textView;
 
 
     @Override
@@ -34,9 +35,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         setContentView(R.layout.activity_main);
         getrequest = (EditText) findViewById(R.id.search_bar);
         search = (Button) findViewById(R.id.search_button);
-        scan = (Button) findViewById(R.id.Barcode_button);
-        list = (LinearLayout) findViewById(R.id.list);
-        getitems = (ListView) findViewById(R.id.list_view2);
+        search.setOnClickListener(this);
+        textView =(TextView)findViewById(R.id.results_view) ;
         linearLayout=(LinearLayout)findViewById(R.id.activity_main);
     }
 
@@ -52,24 +52,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         if (v.getId() == R.id.search_button) {
             InventorySearch();
         }
-        else if (v.getId() == R.id.Barcode_button) {
-            IntentIntegrator scanIntegrator = new IntentIntegrator(this);
-            scanIntegrator.initiateScan();
-        }
+
     }
 
-    public void onActivityResult(int requestCode, int resultCode, Intent intent) {
-        IntentResult scanningResult = IntentIntegrator.parseActivityResult(requestCode, resultCode, intent);
-        if (scanningResult != null) {
-            String scanContent = scanningResult.getContents();
-            URL Barcodeurl = Internetconnect.bUrl(scanContent);
-            new InventoryTask().execute(Barcodeurl);
-        } else {
-            Toast toast = Toast.makeText(getApplicationContext(),
-                    "No scan data received!", Toast.LENGTH_SHORT);
-            toast.show();
-        }
-    }
+
 
     public class InventoryTask extends AsyncTask<URL, Void, String> {
         @Override
@@ -87,35 +73,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         @Override
         protected void onPostExecute(String inventorySearchresults) {
             if (inventorySearchresults != null && !inventorySearchresults.equals("")) {
-                inventorySearchresults = inventorySearchresults.replace("[", "");
-                inventorySearchresults = inventorySearchresults.replace("{", "");
-                inventorySearchresults = inventorySearchresults.replace("}", "");
-                inventorySearchresults = inventorySearchresults.replace("]", "");
-                inventorySearchresults = inventorySearchresults.replace(":", ",");
-                inventorySearchresults = inventorySearchresults.replace("\"", " ");
 
-                String[] inventorySresults = inventorySearchresults.split(",");
-                linearLayout.setVisibility(View.GONE);
+                setContentView(R.layout.searchdisplay);
 
-                adapter = new ArrayAdapter<String>(MainActivity.this, R.layout.searchdisplay, R.id.results_view, inventorySresults) {
-                    @NonNull
-                    @Override
-                    public View getView(int position, View convertView, @NonNull ViewGroup parent) {
-                        // Get the current item from ListView
-                        View view = super.getView(position, convertView, parent);
-                        if (position % 2 == 1) {
-                            // Set a background color for ListView regular row/item
-                            view.setBackgroundColor(Color.GRAY);
-                        } else {
-                            // Set the background color for alternate row/item
-                            view.setBackgroundColor(Color.WHITE);
-                        }
-                        return view;
-                    }
-                };
-
-                getitems.setAdapter(adapter);
-
+                textView.setText(inventorySearchresults);
 
             }
         }
