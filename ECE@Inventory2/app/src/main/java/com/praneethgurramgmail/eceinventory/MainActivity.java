@@ -12,7 +12,7 @@ public class MainActivity extends AppCompatActivity {
 
     private TextView mTextMessage;
 
-    private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
+   /* private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
 
         @Override
@@ -20,7 +20,7 @@ public class MainActivity extends AppCompatActivity {
             switch (item.getItemId()) {
                 case R.id.navigation_home:
                     //mTextMessage.setText(R.string.title_home);
-                   setContentView(R.layout.tab1pid);
+                   //setContentView(R.layout.tab1pid);
                     Intent intent0 =  new Intent(getApplicationContext(), OwnedItems.class);
                     startActivity(intent0);
                     return true;
@@ -37,17 +37,19 @@ public class MainActivity extends AppCompatActivity {
         }
 
     };
+    */
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-       //Intent intent = new Intent(getApplicationContext(),Mywebview.class);
-        //startActivity(intent);
-         setContentView(R.layout.tab1pid);
 
-        mTextMessage = (TextView) findViewById(R.id.message);
-        BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
-        navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
+        //new Mywebview();
+        Intent intent = new Intent(getApplicationContext(),OwnedItems.class);
+        startActivity(intent);
+        //setContentView(R.layout.tab1pid);
+        //mTextMessage = (TextView) findViewById(R.id.message);
+      //  BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
+       // navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
     }
 
 }

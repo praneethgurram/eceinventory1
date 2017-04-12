@@ -30,8 +30,8 @@
         <activity android:name=".ScanSearch"
             android:screenOrientation="portrait"></activity>
         <activity android:name=".OwnedItems"
-            android:screenOrientation="portrait"></activity>
-        <activity android:name=".Mywebview" android:parentActivityName=".OwnedItems"
+            android:screenOrientation="portrait" ></activity>
+        <activity android:name=".Mywebview"
             android:screenOrientation="portrait"></activity>
     </application>
 

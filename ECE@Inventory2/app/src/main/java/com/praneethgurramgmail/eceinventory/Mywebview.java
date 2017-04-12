@@ -53,7 +53,7 @@ public class Mywebview extends AppCompatActivity {
 
 
             if(value != null && value.contains("pep3=pep3=pep3")) {
-
+                //setContentView(R.layout.tab1pid);
                 Intent intent = new Intent(getApplicationContext(),OwnedItems.class);
                 startActivity(intent);
             }

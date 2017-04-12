@@ -15,6 +15,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -26,14 +27,16 @@ import java.net.URL;
  * Created by praneeth on 4/10/2017.
  */
 
-public class OwnedItems extends AppCompatActivity{
+public class OwnedItems extends AppCompatActivity {
     EditText pid;
     Button enter;
-    LinearLayout pidlayout;
+    LinearLayout pidlayout,rowlayout,pid2;
     ListView listView;
     ArrayAdapter<String> adapter;
     JSONObject jsonObject;
     JSONArray jsonArray;
+    TextView textView;
+
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
 
@@ -43,13 +46,13 @@ public class OwnedItems extends AppCompatActivity{
                 case R.id.navigation_home:
                     //mTextMessage.setText(R.string.title_home);
                     //setContentView(R.layout.tab1pid);
-                    Intent intent0 =  new Intent(getApplicationContext(), OwnedItems.class);
+                    Intent intent0 = new Intent(getApplicationContext(), OwnedItems.class);
                     startActivity(intent0);
                     return true;
                 case R.id.navigation_dashboard:
                     //mTextMessage.setText(R.string.title_dashboard);
                     // setContentView(R.layout.tab2search);
-                    Intent intent =  new Intent(getApplicationContext(), ScanSearch.class);
+                    Intent intent = new Intent(getApplicationContext(), ScanSearch.class);
                     startActivity(intent);
                     // setContentView(R.layout.tab2search);
                     return true;
@@ -59,37 +62,46 @@ public class OwnedItems extends AppCompatActivity{
         }
 
     };
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.tab1pid);
         BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
-        pid =(EditText)findViewById (R.id.enter_pid);
-        enter=(Button)findViewById (R.id.enter);
-        enter.setOnClickListener (new View.OnClickListener ( ) {
+        pid = (EditText) findViewById(R.id.enter_pid);
+        enter = (Button) findViewById(R.id.enter);
+        enter.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(v.getId ()==R.id.enter);
+                if (v.getId() == R.id.enter) ;
+
+
                 InventorySearch();
             }
         });
-        pidlayout=(LinearLayout)findViewById (R.id.pid_layout);
-       // listView=(ListView)findViewById (R.id.list_view);
+        pidlayout = (LinearLayout) findViewById(R.id.pid_layout);
+        // listView=(ListView)findViewById (R.id.list_view);
+        rowlayout =(LinearLayout)findViewById(R.id.pidlinear1);
+        textView =(TextView)findViewById(R.id.pidtextview);
+        pid2 =(LinearLayout)findViewById(R.id.pid2);
+
     }
+
     private void InventorySearch() {
         String InQuery = pid.getText().toString();
         URL inventoryurl = Internetconnect.bUrl2(InQuery);
-        new InventoryTask ().execute(inventoryurl);
+        new InventoryTask().execute(inventoryurl);
 
     }
+
     public class InventoryTask extends AsyncTask<URL, Void, String> {
         @Override
         protected String doInBackground(URL... urls) {
             URL searchUrl = urls[0];
             String inventorySearchresults = null;
             try {
-                inventorySearchresults = Internetconnect.ResponsefromAzure2 (searchUrl);
+                inventorySearchresults = Internetconnect.ResponsefromAzure2(searchUrl);
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -99,7 +111,7 @@ public class OwnedItems extends AppCompatActivity{
         @Override
         protected void onPostExecute(String inventorySearchresults) {
             if (inventorySearchresults != null && !inventorySearchresults.equals("")) {
-                inventorySearchresults = inventorySearchresults.replace("[", "");
+              /*  inventorySearchresults = inventorySearchresults.replace("[", "");
                 inventorySearchresults = inventorySearchresults.replace("{", "");
                 inventorySearchresults = inventorySearchresults.replace("}", "");
                 inventorySearchresults = inventorySearchresults.replace("]", "");
@@ -109,9 +121,10 @@ public class OwnedItems extends AppCompatActivity{
                 String[] inventorySresults = inventorySearchresults.split(",");
 
 
-
-
-                pidlayout.setVisibility(View.GONE);
+                */
+              pid2.setVisibility(View.GONE);
+                textView.setText(inventorySearchresults);
+               /* pidlayout.setVisibility(View.GONE);
 
 
                 adapter = new ArrayAdapter<String> (OwnedItems.this, R.layout.rowlayout, R.id.textView, inventorySresults) {
@@ -135,7 +148,7 @@ public class OwnedItems extends AppCompatActivity{
 
 
 
-            }
+            }*/
 
            /* try {
                 jsonObject = new JSONObject(inventorySearchresults);
@@ -182,6 +195,7 @@ public class OwnedItems extends AppCompatActivity{
             } catch (JSONException e) {
                 e.printStackTrace();
             }*/
+            }
         }
     }
 }
