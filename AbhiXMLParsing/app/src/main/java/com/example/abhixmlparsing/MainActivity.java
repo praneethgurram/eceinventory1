@@ -11,10 +11,12 @@ package com.example.abhixmlparsing;
         import org.xmlpull.v1.XmlPullParserException;
         import org.xmlpull.v1.XmlPullParserFactory;
 
+        import java.io.ByteArrayInputStream;
         import java.io.IOException;
         import java.io.InputStream;
         import java.net.URL;
         import java.net.URLConnection;
+        import java.nio.charset.StandardCharsets;
         import java.util.ArrayList;
 
         import javax.xml.parsers.DocumentBuilder;
@@ -40,8 +42,10 @@ public class MainActivity extends AppCompatActivity {
         {
             pullParserFactory = XmlPullParserFactory.newInstance();
             XmlPullParser parser = pullParserFactory.newPullParser();
+            String returnedStr = "<ArrayOfItem xmlns:i=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns=\"http://schemas.datacontract.org/2004/07/ECEInventory.Models\"><Item><AcqDate>06-MAR-2007</AcqDate><Amt>2,119.00</Amt><AssetType i:nil=\"true\"/><AtypTitle i:nil=\"true\"/><Bldg>Whittemore Hall</Bldg><Condition i:nil=\"true\"/><Custodian>Plassmann, Paul E.</Custodian><Description>Computer, Fujitsu Lifebook T4210</Description><Designation i:nil=\"true\"/><LastInvDate i:nil=\"true\"/><Manufacturer>FUJITSU</Manufacturer><Model>LIFEBOOK T4210</Model><OrgnCode i:nil=\"true\"/><OrgnTitle i:nil=\"true\"/><Owner i:nil=\"true\"/><Ownership>University owned</Ownership><PO>MAR0607</PO><Ptag>000294241</Ptag><Room>302C</Room><SN>R6600789</SN><SchevYear>01-DEC-2016</SchevYear><SortRoom>00302C Whittemore Hall</SortRoom><TagType i:nil=\"true\"/></Item><Item><AcqDate>23-APR-2007</AcqDate><Amt>2,130.04</Amt><AssetType i:nil=\"true\"/><AtypTitle i:nil=\"true\"/><Bldg>Home Use</Bldg><Condition i:nil=\"true\"/><Custodian>Plassmann, Paul</Custodian><Description>Computer, Apple iMac 24\"</Description><Designation i:nil=\"true\"/><LastInvDate i:nil=\"true\"/><Manufacturer>APPLE</Manufacturer><Model>IMAC</Model><OrgnCode i:nil=\"true\"/><OrgnTitle i:nil=\"true\"/><Owner i:nil=\"true\"/><Ownership>University owned</Ownership><PO>P0733043</PO><Ptag>000300819</Ptag><Room>HOME</Room><SN>SQP712088VGP</SN><SchevYear>17-APR-2015</SchevYear><SortRoom>99999HOME Home Use</SortRoom><TagType i:nil=\"true\"/></Item><Item><AcqDate>14-APR-2010</AcqDate><Amt>2,755.21</Amt><AssetType i:nil=\"true\"/><AtypTitle i:nil=\"true\"/><Bldg>Home Use</Bldg><Condition i:nil=\"true\"/><Custodian>Plassmann, Paul</Custodian><Description>Laptop, Apple Macbook Pro</Description><Designation i:nil=\"true\"/><LastInvDate i:nil=\"true\"/><Manufacturer>APPLE</Manufacturer><Model>MACBOOK PRO</Model><OrgnCode i:nil=\"true\"/><OrgnTitle i:nil=\"true\"/><Owner i:nil=\"true\"/><Ownership>University owned</Ownership><PO>P1097228</PO><Ptag>000321032</Ptag><Room>HOME</Room><SN>SW80090RQ64C</SN><SchevYear>11-MAY-2015</SchevYear><SortRoom>99999HOME Home Use</SortRoom><TagType i:nil=\"true\"/></Item><Item><AcqDate>28-MAR-2013</AcqDate><Amt>1,896.19</Amt><AssetType i:nil=\"true\"/><AtypTitle i:nil=\"true\"/><Bldg>Home Use</Bldg><Condition i:nil=\"true\"/><Custodian>Plassmann, Paul</Custodian><Description>Laptop, Apple Macbook Pro</Description><Designation i:nil=\"true\"/><LastInvDate i:nil=\"true\"/><Manufacturer>APPLE</Manufacturer><Model>MACBOOK PRO</Model><OrgnCode i:nil=\"true\"/><OrgnTitle i:nil=\"true\"/><Owner i:nil=\"true\"/><Ownership>SCHEV ownership</Ownership><PO>P2451321</PO><Ptag>000354629</Ptag><Room>HOME</Room><SN>C02KC5D5FFT0</SN><SchevYear>11-MAY-2015</SchevYear><SortRoom>99999HOME Home Use</SortRoom><TagType i:nil=\"true\"/></Item></ArrayOfItem>";
+            InputStream in_s = new ByteArrayInputStream(returnedStr.getBytes("UTF-8"));
 
-            InputStream in_s = getApplicationContext().getAssets().open("pep3.xml");
+            //InputStream in_s = getApplicationContext().getAssets().open("pep3.xml");
             parser.setFeature(XmlPullParser.FEATURE_PROCESS_NAMESPACES, false);
             parser.setInput(in_s, null);
 
@@ -52,6 +56,8 @@ public class MainActivity extends AppCompatActivity {
             String text = "";
 
             for (Item item : items) {
+
+                System.out.println("@@@ item name :" + item.getDescription());
 
                 text += "AcqDate = " + item.getAcqDate() +
                         "\n Amt = " + item.getAmt() +
@@ -77,10 +83,9 @@ public class MainActivity extends AppCompatActivity {
                         "\n SortRoom = " + item.getSortRoom() +
                         "\n TagType = "  + item.getTagType() +
                         "\n";
-                System.out.println("@@@" + text);
-                System.out.println("@@@ \n\n\n");
-
             }
+
+            System.out.println("@@@" + text);
 
 //            textView.setText(text);
 
